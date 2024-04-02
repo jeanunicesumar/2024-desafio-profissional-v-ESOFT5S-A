@@ -6,10 +6,11 @@ import ValidationRequest from "../middlewares/validation.request";
 import { UpdateUserSchema } from "../dtos/update-user.dto";
 import { LoginUserSchema } from "../dtos/login-user.dto";
 import { CreateUserSchema } from "../dtos/create-user.dto";
+import userModel from '../entity/user.schema';
 
 const userRoutes = Router()
 
-const userRepository: UserRepository = new UserRepository();
+const userRepository: UserRepository = new UserRepository(userModel);
 const userService: UserService = new UserService(userRepository);
 const userController: UserController = new UserController(userService);
 

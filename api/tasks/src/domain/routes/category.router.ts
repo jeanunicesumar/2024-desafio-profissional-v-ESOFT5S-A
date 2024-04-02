@@ -5,10 +5,11 @@ import { CategoryController } from "../controller/category.controller";
 import ValidationRequest from "../middlewares/validation.request";
 import { CreateCategorySchema } from "../dtos/create-category.dto";
 import { UpdateCategorySchema } from "../dtos/update-category.dto";
+import categoryModel from "../entity/category.schema";
 
 const categoryRoutes = Router()
 
-const categoryRepository: CategoryRepository = new CategoryRepository();
+const categoryRepository: CategoryRepository = new CategoryRepository(categoryModel);
 const categoryService: CategoryService = new CategoryService(categoryRepository);
 const categoryController: CategoryController = new CategoryController(categoryService);
 

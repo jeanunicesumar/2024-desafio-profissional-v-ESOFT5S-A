@@ -1,35 +1,17 @@
 import { Category } from './../types/category';
-import { CreateCategoryDTO } from '../dtos/create-category.dto';
-import categoryModel from '../entity/category.schema'
-import { Types } from 'mongoose';
-import { UpdateCategoryDTO } from '../dtos/update-category.dto';
+import { Model, Types } from 'mongoose';
+import { CrudRepository } from './crud.repository';
 const { ObjectId } = Types;
 
-export class CategoryRepository {
+export class CategoryRepository extends CrudRepository<Category> {
 
-    public async findAll(): Promise<Category[]> {
-        return categoryModel.find();
-    }
-
-    public async findById(id: string): Promise<Category | null> {
-        return categoryModel.findById(id);
-    }
-
-    public async create(category: CreateCategoryDTO): Promise<void> {
-        await categoryModel.create(category);
-    }
-
-    public async update(oldCategory: Category, category: UpdateCategoryDTO): Promise<void> {
-        await categoryModel.updateOne(oldCategory, category);
-    }
-
-    public async delete(category: Category): Promise<void> {
-        await categoryModel.deleteOne(category);
+    constructor(model: Model<Category>) {
+        super(model);
     }
 
     public async findAllByUser(idUser: string): Promise<Category[]> {
 
-        return categoryModel.aggregate([
+        return this.model.aggregate([
             {
                 $lookup: {
                     from: 'tasks',

@@ -7,37 +7,20 @@ import { User } from '../types/user';
 import { Password } from '../utils/password.utils';
 import { StatusCode } from '../enums/status.code';
 import { LoginUserDTO } from '../dtos/login-user.dto';
+import { CrudService } from './crud.service';
 
-export class UserService {
+export class UserService extends CrudService<User, CreateUserDTO, UpdateUserDTO> {
 
-    private readonly repository: UserRepository;
+    protected readonly repository: UserRepository;
 
     constructor(repository: UserRepository) {
+        super(repository);
         this.repository = repository;
     }
 
-    public async findAll(): Promise<User[]> {
-        return this.repository.findAll()
-    }
-
-    public async find(id: string): Promise<User> {
-        return this.findById(id);
-    }
-
-    public async create(user: CreateUserDTO): Promise<void> {
-        user.password = await Password.generateHash(user.password)
-        
-        await this.repository.create(user)
-    }
-
-    public async update(id: string, user: UpdateUserDTO): Promise<void> {
-        const foundUser: User = await this.findById(id);
-        await this.repository.update(foundUser, user)
-    }
-
-    public async delete(id: string): Promise<void> {
-        const foundUser: User = await this.findById(id);
-        await this.repository.delete(foundUser)
+    public async create(data: CreateUserDTO): Promise<void> {
+        data.password = await Password.generateHash(data.password);
+        this.repository.create(data as User);
     }
 
     public async auth(user: LoginUserDTO): Promise<void> {
@@ -49,18 +32,6 @@ export class UserService {
         if(!isValidPassword) {
             throw new UnauthorizedError('Password invalid', StatusCode.UNAUTHORIZED);
         }
-
-    }
-
-    private async findById(id: string): Promise<User> {
-
-        const user: User | null = await this.repository.findById(id);
-
-        if(!user) {
-            throw new NotFoundError(`User ${id} not found`, StatusCode.NOT_FOUND);
-        }
-
-        return user;
 
     }
 
