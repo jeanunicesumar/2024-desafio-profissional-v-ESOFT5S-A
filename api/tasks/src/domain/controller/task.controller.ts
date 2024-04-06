@@ -31,7 +31,7 @@ export class TaskController extends CrudController<Task, CreateTaskDTO, UpdateTa
     }
 
     public async findAllByStatus(request: Request, response: Response): Promise<void> {
-        const status: string = request.params.status;
+        const status: string = request.query.name as string;
 
         const tasks: Task[] =  await this.service.findAllByStatus(status);
         response.status(StatusCode.SUCCESS).json(tasks)

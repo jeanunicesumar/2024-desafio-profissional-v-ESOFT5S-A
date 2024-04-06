@@ -1,8 +1,8 @@
 
 export enum StatusTask {
 
-    PENDING = "Pendente",
-    IN_PROGRESS = "Em Progresso",
-    COMPLETED = "Concluida"
+    PENDING = "pendente",
+    IN_PROGRESS = "em progresso",
+    COMPLETED = "concluida"
     
 }

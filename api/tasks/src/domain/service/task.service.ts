@@ -1,3 +1,4 @@
+import { InvalidQueryError } from './../helpers/errors/invalid-query.error';
 import { CreateTaskDTO } from './../dtos/create-task.dto';
 import { Task } from '../types/task';
 import { TaskRepository } from './../repository/task.repository';
@@ -27,6 +28,11 @@ export class TaskService extends CrudService<Task, CreateTaskDTO, UpdateTaskDTO>
     }
 
     public async findAllByStatus(status: string): Promise<Task[]> {
+
+        if(!this.isValidStatus(status)) {
+            throw new InvalidQueryError(`Status ${status} invalid`, StatusCode.BAD_REQUEST);
+        }
+
         const tasks: Task[] = await this.repository.findAll();
 
         return tasks.filter(task => task.status === status);
@@ -104,6 +110,11 @@ export class TaskService extends CrudService<Task, CreateTaskDTO, UpdateTaskDTO>
         })
 
         return result;
+    }
+
+    private isValidStatus(status: string): boolean {
+        const validStatus = Object.values(StatusTask);
+        return validStatus.includes(status.toLocaleLowerCase() as StatusTask);
     }
 
 }

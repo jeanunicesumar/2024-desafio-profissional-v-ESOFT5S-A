@@ -2,14 +2,12 @@ import 'express-async-errors';
 import express from 'express';
 import mongoose from 'mongoose';
 import { routes } from './routes';
-import dotenv from 'dotenv';
-
-dotenv.config();
+import config from './src/config';
 
 class App {
     express: express.Application;
-    private readonly DB_HOST = process.env.DB_HOST!;
-    private readonly DB_NAME = process.env.DB_NAME!;
+    private readonly DB_URL = config.dbUrl;
+    private readonly DB_NAME = config.dbName;
 
     constructor() {
         this.express = express();
@@ -25,7 +23,7 @@ class App {
     private async database() {
         try {
             mongoose.set("strictQuery", true);
-            await mongoose.connect(this.DB_HOST + this.DB_NAME);
+            await mongoose.connect(`${this.DB_URL}/${this.DB_NAME}`);
             console.log("connect database success");
         } catch (error) {
             console.error('Cannot connect to database, error:', error);
