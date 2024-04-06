@@ -5,17 +5,18 @@ import { TaskService } from "../service/task.service";
 import ValidationRequest from "../middlewares/validation.request";
 import { CreateTaskSchema } from "../dtos/create-task.dto";
 import { UpdateTaskSchema } from "../dtos/update-task.dto";
+import taskModel from '../entity/task.schema';
 
 const taskRoutes = Router()
 
-const taskRepository: TaskRepository = new TaskRepository();
+const taskRepository: TaskRepository = new TaskRepository(taskModel);
 const taskService: TaskService = new TaskService(taskRepository);
 const taskController: TaskController = new TaskController(taskService);
 
 taskRoutes.post('', (req, res, next) => ValidationRequest.body(req, res, next, CreateTaskSchema), taskController.create.bind(taskController))
 taskRoutes.get('', taskController.findAll.bind(taskController))
 taskRoutes.get('/completed/avg', taskController.findByCompletedAvg.bind(taskController))
-taskRoutes.get('/description/bigger', taskController.findByDescriptionBigger.bind(taskController))
+taskRoutes.get('/description/bigg   er', taskController.findByDescriptionBigger.bind(taskController))
 taskRoutes.get('/category/group', taskController.findAndGroupByCategory.bind(taskController))
 taskRoutes.get('/period', taskController.findAllByPeriodDateConclusion.bind(taskController))
 taskRoutes.get('/:id', ValidationRequest.paramsId, taskController.findById.bind(taskController))

@@ -1,27 +1,12 @@
 import taskModel from '../entity/task.schema'
 import { Task } from '../types/task';
-import { CreateTaskDTO } from '../dtos/create-task.dto';
+import { CrudRepository } from './crud.repository';
+import { Model } from 'mongoose';
 
-export class TaskRepository {
+export class TaskRepository extends CrudRepository<Task> {
 
-    public async findAll(): Promise<Task[]> {
-        return taskModel.find().populate('user').populate('category');
-    }
-
-    public async findById(id: string): Promise<Task | null> {
-        return taskModel.findById(id).populate('user').populate('category');
-    }
-
-    public async create(task: CreateTaskDTO): Promise<void> {
-        await taskModel.create(task);
-    }
-
-    public async update(foundTask: Task, task: CreateTaskDTO): Promise<void> {
-        await taskModel.updateOne(foundTask, task);
-    }
-
-    public async delete(task: Task): Promise<void> {
-        await taskModel.deleteOne(task);
+    constructor(model: Model<Task>) {
+        super(model);
     }
 
     public async findAllByUser(idUser: string): Promise<Task[]> {

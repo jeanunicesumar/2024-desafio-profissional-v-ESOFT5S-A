@@ -5,48 +5,15 @@ import { TaskService } from '../service/task.service';
 import { Task } from '../types/task';
 import { CreateTaskDTO } from '../dtos/create-task.dto';
 import { TasksByCategory } from '../types/tasksByCategory';
+import { CrudController } from './crud.controller';
 
-export class TaskController {
+export class TaskController extends CrudController<Task, CreateTaskDTO, UpdateTaskDTO> {
 
-    private readonly service: TaskService
+    protected readonly service: TaskService
 
     constructor(service: TaskService) {
+        super(service);
         this.service = service;
-    }
-
-    public async findAll(request: Request, response: Response): Promise<void> {
-        const tasks: Task[] = await this.service.findAll();
-
-        response.status(StatusCode.SUCCESS).json(tasks);
-    }
-
-    public async findById(request: Request, response: Response): Promise<void> {
-        const idTask: string = request.params.id;
-
-        const foundTask: Task = await this.service.find(idTask);
-        response.status(StatusCode.SUCCESS).json(foundTask);
-    }   
-
-    public async create(request: Request, response: Response): Promise<void> {
-        const task: CreateTaskDTO = request.body;
-
-        await this.service.create(task)
-        response.status(StatusCode.CREATED).json()
-    }
-
-    public async update(request: Request, response: Response): Promise<void> {
-        const idTask: string = request.params.id
-        const task: UpdateTaskDTO = request.body
-
-        await this.service.update(idTask, task)
-        response.status(StatusCode.SUCCESS).json()
-    }
-
-    public async delete(request: Request, response: Response): Promise<void> {
-        const idTask: string = request.params.id
-
-        await this.service.delete(idTask)
-        response.status(StatusCode.NO_CONTENT).json()
     }
 
     public async findAllByUser(request: Request, response: Response): Promise<void> {
@@ -100,8 +67,8 @@ export class TaskController {
     }
 
     public async findByCompletedAvg(request: Request, response: Response): Promise<void> {
-        const average: string =  await this.service.findByCompletedAvg();
-
+        const average: number =  await this.service.findByCompletedAvg();
+        
         response.status(StatusCode.SUCCESS).json({ average: average })
     }
 

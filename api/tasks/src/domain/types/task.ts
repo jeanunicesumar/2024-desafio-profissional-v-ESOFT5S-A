@@ -1,9 +1,9 @@
+import { Document } from "mongoose";
 import { StatusTask } from "../enums/status.task";
 import { Category } from "./category";
 import { User } from "./user";
 
-export interface Task {
-    _id: string,
+export interface Task extends Document {    
     description: string,
     title: string,
     dateCreate: Date, 

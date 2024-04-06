@@ -1,4 +1,3 @@
-import { NotFoundError } from './../helpers/errors/not-found.error';
 import { CreateTaskDTO } from './../dtos/create-task.dto';
 import { Task } from '../types/task';
 import { TaskRepository } from './../repository/task.repository';
@@ -6,35 +5,15 @@ import { StatusCode } from '../enums/status.code';
 import { StatusTask } from '../enums/status.task';
 import { TasksByCategory } from '../types/tasksByCategory';
 import { UpdateTaskDTO } from '../dtos/update-task.dto';
+import { CrudService } from './crud.service';
 
-export class TaskService {
+export class TaskService extends CrudService<Task, CreateTaskDTO, UpdateTaskDTO> {
 
-    private readonly repository: TaskRepository;
+    protected readonly repository: TaskRepository;
 
     constructor(repository: TaskRepository) {
+        super(repository);
         this.repository = repository;
-    }
-
-    public async findAll(): Promise<Task[]> {
-        return this.repository.findAll()
-    }
-
-    public async find(id: string): Promise<Task> {
-        return this.findById(id);
-    }
-
-    public async create(task: CreateTaskDTO): Promise<void> {        
-        await this.repository.create(task)
-    }
-
-    public async update(id: string, task: UpdateTaskDTO): Promise<void> {
-        const foundTask: Task = await this.findById(id);
-        await this.repository.update(foundTask, task);
-    }
-
-    public async delete(id: string): Promise<void> {
-        const foundTask: Task = await this.findById(id);
-        await this.repository.delete(foundTask)
     }
 
     public async findAllByUser(idUser: string): Promise<Task[]> {
@@ -77,16 +56,16 @@ export class TaskService {
         return (await this.findAllByUser(idUser)).length;
     }
 
-    public async findByCompletedAvg(): Promise<string> {
+    public async findByCompletedAvg(): Promise<number> {
         const tasks: Task[] = await this.repository.findAll();
         const tasksCompleted: Task[] = tasks.filter(task => task.status === StatusTask.COMPLETED);
 
         if (tasksCompleted.length === 0) {
-            return '0';
+            return 0;
         }
 
         const average: Number = (tasksCompleted.length / tasks.length) * 100;
-        return average.toFixed(2)
+        return parseFloat(average.toFixed(2));
 
     }
 
@@ -102,18 +81,6 @@ export class TaskService {
 
         const tasksByCategory: TasksByCategory = this.groupingByCategory(tasks);
         return tasksByCategory;
-    }
-
-    private async findById(id: string): Promise<Task> {
-
-        const task: Task | null = await this.repository.findById(id);
-
-        if(!task) {
-            throw new NotFoundError(`Task ${id} not found`, StatusCode.NOT_FOUND);
-        }
-
-        return task;
-
     }
 
     private isDateBetween(date: Date, initialDate: Date, finalDate: Date): boolean {
