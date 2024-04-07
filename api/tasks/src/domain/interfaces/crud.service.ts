@@ -11,5 +11,4 @@ export interface ICrudService<Entity, CreateDTO, UpdateDTO> {
 
     delete(id: string): Promise<void>;
         
-
 }

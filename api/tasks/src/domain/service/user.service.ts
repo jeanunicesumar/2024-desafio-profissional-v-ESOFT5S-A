@@ -41,7 +41,7 @@ export class UserService extends CrudService<User, CreateUserDTO, UpdateUserDTO>
 
         const user: User | null = await this.repository.findByEmail(email);
 
-        if(!user) {
+        if(user) {
             throw new DuplicateEmailError(`User ${email} already exists`, StatusCode.BAD_REQUEST);
         }
     }
