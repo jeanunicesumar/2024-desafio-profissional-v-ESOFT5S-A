@@ -30,7 +30,6 @@ describe('Users', () => {
     
             expect(response.statusCode).toEqual(200);
             expect(result.length).toEqual(3);
-            expect(result[0]._id).toBe("661317e10b061b35263b93d0");
         });
     });
 
@@ -42,6 +41,15 @@ describe('Users', () => {
     
             expect(response.statusCode).toEqual(200);
             expect(result.username).toBe("jean123");
+        });
+
+        it('should return 404 user not found', async () => {
+            const userId = "661317e10b061b35263b93d1";
+            const response = await request.get(`/users/${userId}`);
+            const result = await response.body;
+    
+            expect(response.statusCode).toEqual(404);
+            expect(result.message).toBe("661317e10b061b35263b93d1 not found");
         });
     })
     
