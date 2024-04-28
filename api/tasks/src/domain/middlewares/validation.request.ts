@@ -6,6 +6,11 @@ export default class ValidationRequest {
 
     public static async body(request: Request, response: Response, next: NextFunction, body: any): Promise<void> {
         try {
+
+            if (request.body.dateConclusion) {
+                request.body.dateConclusion = new Date(request.body.dateConclusion);
+            }
+            
             body.parse(request.body);
             next();
         } catch(error: any) {

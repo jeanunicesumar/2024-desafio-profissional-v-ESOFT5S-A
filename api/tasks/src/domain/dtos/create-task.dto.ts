@@ -16,7 +16,7 @@ export interface CreateTaskDTO {
 export const CreateTaskSchema = z.object({
     title: z.string(),
     description: z.string(),
-    dateConclusion: z.date().refine((date) => date < new Date(), {
+    dateConclusion: z.date().refine((date) => date >= new Date(), {
         message: 'The birth date must not be earlier than the current date',
     }),
     type: z.string(),
