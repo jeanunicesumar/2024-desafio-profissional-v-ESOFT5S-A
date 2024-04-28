@@ -25,6 +25,8 @@
 npm i
 ```
 
+- Altere o nome do arquivo '.env-for-users' para .env:
+
 - Inicie a aplicação:
 ```js
 npm start
