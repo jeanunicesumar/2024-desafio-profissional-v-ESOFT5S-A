@@ -30,6 +30,11 @@ npm i
 npm start
 ```
 
+### Como rodar os testes :office:
+```js
+npm test
+```
+
 ### Tecnologias utilizadas :zap:
 - [Node](https://nodejs.org/en)
 - [Express](https://expressjs.com/pt-br/)
@@ -37,6 +42,13 @@ npm start
 - [Mongo](https://www.mongodb.com/try/download/community)
 
 ### Rotas Postman para download :zap:
-[Rotas Postman](https://raw.githubusercontent.com/jeanunicesumar/2024-desafio-profissional-v-ESOFT5S-A/main/api/tasks/Api%20de%20Tarefas%20-%20Node.postman_collection)
+[Download e importação no Postman](https://github.com/jeanunicesumar/2024-desafio-profissional-v-ESOFT5S-A/blob/main/api/tasks/Api%20de%20Tarefas%20-%20Node.postman_collection)
+
+[Visualiazação via navegador](https://www.postman.com/winter-comet-282388/workspace/engenharia-software/collection/23715007-333b993b-f88e-479f-a740-6bab95eac69e?action=share&creator=23715007)
 
 > Status do Projeto: Concluido :heavy_check_mark:
+
+### Participante: 
+|name|email|course|
+| -------- | --------------- | -------- |
+|Jean Soares|jeansoaresdeveloper@gmail.com|Engenharia de Software|
