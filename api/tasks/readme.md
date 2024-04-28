@@ -1,9 +1,8 @@
 # Gerenciador de Tarefas
 
-## Gerenciador de tarefas desenvolvido no curso de Engenharia de Software - 5º Semestre
-## Disciplina: Desafio Profissional
+### Gerenciador de tarefas desenvolvido no curso de Engenharia de Software - 5º Semestre - Disciplina: Desafio Profissional
 
-## O que a api é capaz de fazer :checkered_flag:
+### O que a api é capaz de fazer :checkered_flag:
 
 :trophy: CRUD de Users
 
@@ -11,12 +10,12 @@
 
 :trophy: CRUD de Tasks
 
-## Rotas :zap:
+### Rotas :zap:
 - http://localhost:3000/users
 - http://localhost:3000/tasks
 - http://localhost:3000/categories
 
-## Como executar a aplicação :arrow_forward:
+### Como executar a aplicação :arrow_forward:
 
 - É necessário ter o mongo instalado em sua máquina:
 - [Mongo](https://www.mongodb.com/try/download/community)
@@ -31,13 +30,13 @@ npm i
 npm start
 ```
 
-## Tecnologias utilizadas :zap:
+### Tecnologias utilizadas :zap:
 - [Node](https://nodejs.org/en)
 - [Express](https://expressjs.com/pt-br/)
 - [Typescript](https://www.typescriptlang.org/)
 - [Mongo](https://www.mongodb.com/try/download/community)
 
-## Rotas Postman para download :zap:
-
+### Rotas Postman para download :zap:
+[Rotas Postman](https://raw.githubusercontent.com/jeanunicesumar/2024-desafio-profissional-v-ESOFT5S-A/main/api/tasks/Api%20de%20Tarefas%20-%20Node.postman_collection)
 
 > Status do Projeto: Concluido :heavy_check_mark:
