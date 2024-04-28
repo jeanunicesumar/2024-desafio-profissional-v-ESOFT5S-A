@@ -18,7 +18,7 @@
 ### Como executar a aplicação :arrow_forward:
 
 - É necessário ter o mongo instalado em sua máquina:
-- [Mongo](https://www.mongodb.com/try/download/community)
+    - [Mongo](https://www.mongodb.com/try/download/community)
 
 - Instale as dependências da aplicação:
 ```js
@@ -44,7 +44,7 @@ npm test
 ### Rotas Postman para download :zap:
 [Download e importação no Postman](https://github.com/jeanunicesumar/2024-desafio-profissional-v-ESOFT5S-A/blob/main/api/tasks/Api%20de%20Tarefas%20-%20Node.postman_collection)
 
-[Visualiazação via navegador](https://www.postman.com/winter-comet-282388/workspace/engenharia-software/collection/23715007-333b993b-f88e-479f-a740-6bab95eac69e?action=share&creator=23715007)
+[Visualização via navegador](https://www.postman.com/winter-comet-282388/workspace/engenharia-software/collection/23715007-333b993b-f88e-479f-a740-6bab95eac69e?action=share&creator=23715007)
 
 > Status do Projeto: Concluido :heavy_check_mark:
 
